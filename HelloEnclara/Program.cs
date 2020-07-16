@@ -45,7 +45,7 @@ namespace HelloEnclara
             sentences = Regex.Split(paragraph, @"(?<=[\.!\?])\s+");
             for (int i = 0; i < sentences.Length; i++)
             {
-                //Console.WriteLine("[" + i + "] " + sentences[i]);
+                //Console.WriteLine("[" + i + "] " + sentences[i]); This will make sure that the sentences are parsed correctly.
                 checkPalaWord(sentences[i]);
             }
         }
@@ -57,23 +57,17 @@ namespace HelloEnclara
 
         public void checkPalaWord(string sentence) // This will check a sentence to determine if there are palindrome words.
         {
-            char[] delimiterChars = { ' ', ',', '.', ':','?', '!', '\t', '\n' }; // delimeters
-            string[] words = sentence.Split(delimiterChars); // Place each word into an array
-            foreach (var word in words)
+            char[] trimChars = { '*', '@', ' ', '.', '?', '!' };
+            string[] words = sentence.Split(' ', '\n', '\t', ',', '.', '!', '?');
+            //string[] words = sentence.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+
+            for(int i = 0; i < words.Length; i++)
             {
-                if(word != null)
+                if ((words[i].Trim(trimChars).SequenceEqual(words[i].Reverse())) && (words[i] != ""))
                 {
-                    string reverse = "";
-                    for (int i = word.Length - 1; i >= 0; i--)
-                    {
-                        reverse += word[i].ToString();
-                    }
-                    if (reverse == word)
-                    {
-                        System.Console.WriteLine($"{word}"); // Used for printing/testing to make sure palindromes were detected
-                    }
+                    palaWords++;
+                    Console.WriteLine("words[" + i + "] = " + words[i] + ", and it is a palindrome."); // Prints out any palindrones.
                 }
-                
             }
         }
 

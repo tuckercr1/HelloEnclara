@@ -7,7 +7,7 @@ HelloEnclara is a C# solution written for a coding assessment. The solution was 
 
 
 ### What does it do?
-It was required to take in a paragraph as an input and perform the following actions:
+It is required to take in a paragraph as an input and perform the following actions:
 - 1. Give the number of palindrome words.
 - 2. Give the number of palindrome sentences.
 - 3. List the unique words of a paragraph with the count of the word instance.

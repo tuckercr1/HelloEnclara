@@ -34,3 +34,5 @@ The user is able to input a letter to list all words that contain that letter. T
 
 Pictured below is the **searchWords()** method.
 ![alt text](https://github.com/tuckercr1/HelloEnclara/blob/master/photos/searchWords.png)
+
+Sample output of "helloworld", "HelloWorld", and "HELLOWORLD".

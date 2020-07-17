@@ -12,6 +12,7 @@ namespace HelloEnclara
         private string paragraph; // The user will input a paragraph
         private char letter = ' '; // The user will optionally input a letter to search for words
         private string[] sentences; // The sentences of the paragraph
+        private string[] words; // The words in the paragraph
         private int palaWords; // The number of palindrome words
         private int palaSents; // The number of palindrome sentences
 
@@ -35,50 +36,75 @@ namespace HelloEnclara
             return letter;
         }
 
-        public int getPalaWords()
+        public int getPalaWords() // Returns number of palindrome words
         {
             return palaWords;
         }
 
-        public void parsePara() // Turn the paragraph into individual sentences
+        public int getPalaSents() // Returns number of palindrome sentences
         {
+            return palaSents;
+        }
+
+        public void parseParagraph() // Search through the paragraph to find palindrome words and sentences
+        {
+            words = paragraph.Split();
             sentences = Regex.Split(paragraph, @"(?<=[\.!\?])\s+");
             for (int i = 0; i < sentences.Length; i++)
             {
-                //Console.WriteLine("[" + i + "] " + sentences[i]); This will make sure that the sentences are parsed correctly.
-                checkPalaWord(sentences[i]);
+                if (checkWord(checkPalaSent(sentences[i])))
+                {
+                    //Console.WriteLine("yes the sentence '" + sentences[i] + "' is a palindrome.");
+                    palaSents++;
+                }
+            }
+            for (int j = 0; j < words.Length; j++)
+            {
+                if (checkWord(checkPalaSent(words[j])))
+                {
+                    //Console.WriteLine("yes the word '" + words[j] + "' is a palindrome.");
+                    palaWords++;
+                }
             }
         }
 
-        public void checkPalaSent(string sentence) // This will check sentence to determine if it is a palindrome.
+        public string checkPalaSent(string sentence) // This will check sentence to determine if it is a palindrome
         {
-
+            Regex delimeters = new Regex("[;,.!?\t\r ]|[\n]{2}");// This is a list of delimeters to search for to remove
+            string newSent = delimeters.Replace(sentence.ToLower(), ""); // This will make all letters lowercase and search for characters to remove
+            //Console.WriteLine("newSent = " + newSent); // Test to see if newSent is formatted properly
+            return newSent;
         }
 
-        public void checkPalaWord(string sentence) // This will check a sentence to determine if there are palindrome words.
+        // This code comes from https://www.dotnetperls.com/palindrome
+        public Boolean checkWord(string word) // Checks to determine if a word is a palindrome by comparing opposing letters against eachother.
         {
-            char[] trimChars = { '*', '@', ' ', '.', '?', '!' };
-            string[] words = sentence.Split(' ', '\n', '\t', ',', '.', '!', '?');
-            //string[] words = sentence.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-
-            for(int i = 0; i < words.Length; i++)
+            int min = 0;  // Lowest position in a character array
+            int max = word.Length - 1; // Highest position in a character array.
+            while (true)
             {
-                if ((words[i].Trim(trimChars).SequenceEqual(words[i].Reverse())) && (words[i] != ""))
+                if (min > max) // If the lower position is larger than the higher position, then the letters of the word have been traversed and it is a palindrome
                 {
-                    palaWords++;
-                    Console.WriteLine("words[" + i + "] = " + words[i] + ", and it is a palindrome."); // Prints out any palindrones.
+                    return true;
                 }
+                char lower = word[min];
+                char upper = word[max];
+                if (char.ToLower(lower) != char.ToLower(upper)) // If alower character does not equal an upper character then the word is not a palindrome
+                {
+                    return false;
+                }
+                min++;
+                max--;
             }
         }
 
         static void Main(string[] args)
         {
-            string para;
-
             // The user will be prompted to input a paragraph.
+            string para;
             Console.WriteLine("Please type a paragraph: ");
             para = Console.ReadLine();
-            Program p = new Program(para); // Constructor for making the paragraph reading Program
+            Program p = new Program(para.Replace("Mr.", "Mr").Replace("Mrs.", "Mrs").Replace("Ms.", "Ms")); // Constructor for making the paragraph reading Program
             
             // This loop will allow the user to inut a search letter.
             Console.WriteLine("Would you like to input a search letter? y/n");
@@ -92,12 +118,10 @@ namespace HelloEnclara
                     Console.WriteLine();
                     break;
                 }
-
                 if (yn == "n") // If the user does not want to input a search letter
                 {
                     break;
                 }
-
                 Console.WriteLine("Please select y/n");
             }
 
@@ -112,10 +136,11 @@ namespace HelloEnclara
                 Console.WriteLine("The search letter is: " + p.getLetr());
             }
 
-            p.parsePara();
-            Console.WriteLine("Number of palindromes is: " + p.getPalaWords());
+            p.parseParagraph();
+            Console.WriteLine("Number of palindrome words: " + p.getPalaWords());
+            Console.WriteLine("Number of palindrome sentences: " + p.getPalaSents());
 
-
+            Console.WriteLine("paragraph length is: " + p.getPara().Length);
             Console.ReadKey();
         }
     }

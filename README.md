@@ -17,3 +17,11 @@ The input paragraph is parsed by the **parseParagraph()** method and separated i
 
 Pictured below are the **parseParagraph()** and **checkPalStr(string str)** methods.
 ![alt text](https://github.com/tuckercr1/HelloEnclara/blob/master/photos/parseParagraph%20%2B%20checkPalStr.png)
+
+
+- 3. List the unique words of a paragraph with the count of the word instance.
+
+Counting the instance of unique words is handled by the **countWords()** method. Words with different capitalizations are not considered unique. For example, "helloworld", "Helloworld", and "HelloWorld" will all be considered the same word, so the word count for "helloworld" would be 3.
+
+
+Pictured below is the **countWords()** method.

@@ -37,7 +37,8 @@ Pictured below is the **searchWords()** method.
 
 
 ### Sample Outputs
-Sample output of "helloworld", "HelloWorld", and "HELLOWORLD".
+Sample output of "helloworld", "HelloWorld", and "HELLOWORLD" with "h" input as the search letter.
 ![alt text](https://github.com/tuckercr1/HelloEnclara/blob/master/photos/Sample%201.png)
 
-Sample output of "Mr. Owl ate my metal worm."
+Sample output of "Mr. Owl ate my metal worm." with "m" input as the search letter.
+![alt text](https://github.com/tuckercr1/HelloEnclara/blob/master/photos/Sample%202%20(1).png)

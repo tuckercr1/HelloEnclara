@@ -16,3 +16,4 @@ A ***palindrome*** is a word or phrase that is spelled the same forwards and bac
 The input paragraph is parsed by the **parseParagraph()** method and separated into sentences, then sentences into words. Each sentence has its delimiting characters removed by the **checkPalStr(string str)** method and is then compressed into a singular string. For example, "Mr. Owl ate my metal worm" becomes "MrOwlatemymetalworm". This new "word sentence", as well as the individual words from the original paragraph, get passed to the method **checkWord(string word)** to determine whether or not they are a palindrome.
 
 Pictured below are the **parseParagraph()** and **checkPalStr(string str)** methods.
+![alt text](https://github.com/tuckercr1/HelloEnclara/blob/master/photos/parseParagraph%20%2B%20checkPalStr.png)

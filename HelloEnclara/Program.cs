@@ -13,11 +13,10 @@ namespace HelloEnclara
         private char letter = ' '; // The user will optionally input a letter to search for words
         private string[] sentences; // The sentences of the paragraph
         private string[] words; // The words in the paragraph
-        private int uniqCount = 1; // The Unique word count, starts at 1 because if a word has a count then it would occur atleast once
-        private int palaWords; // The number of palindrome words
+        private int palWords; // The number of palindrome words
         private int palaSents; // The number of palindrome sentences
 
-        public Program(string para) // Constructor for if the user does not input a letter
+        public Program(string para) // Constructor
         {
             paragraph = para; 
         }
@@ -37,9 +36,9 @@ namespace HelloEnclara
             return letter;
         }
 
-        public int getPalaWords() // Returns number of palindrome words
+        public int getPalWords() // Returns number of palindrome words
         {
-            return palaWords;
+            return palWords;
         }
 
         public int getPalaSents() // Returns number of palindrome sentences
@@ -65,19 +64,29 @@ namespace HelloEnclara
         public void countWords() // Counts the unique instances of the words in the paragraph
         {
             var result = words.GroupBy(a => a).Select(x => new { key = x.Key, val = x.Count() });
+            Console.WriteLine("{0,-10}   {1,-10}", "Word", "Count");
             foreach (var item in result)
             {
-                //Console.WriteLine(item.key + "        " + item.val);
                 Console.WriteLine("{0,-10}   {1,-10}", item.key, item.val);
             }
-            Console.WriteLine("_________________________________________________________________");
         }
             
-        public void printWords() // Delete this method later
+        public void searchWords() // Searches for words with the designated letter.
         {
-            for (int i = 0; i < words.Length; i++)
+            int i = 0;
+            var result = words.GroupBy(a => a).Select(x => new { key = x.Key, val = x.Count() });
+            foreach (var item in result)
             {
-                Console.WriteLine(words[i]);
+                string temp = item.ToString();
+                if (item.key.ToString().Contains(letter.ToString()))
+                {
+                    Console.WriteLine("{0,-10}", item.key);
+                    i = 1;
+                }
+            }
+            if(i == 0)
+            {
+                Console.WriteLine("No words contain the letter '" + letter + "'"); 
             }
         }
 
@@ -99,18 +108,20 @@ namespace HelloEnclara
                 if (checkWord(checkPalaSent(words[j])))
                 {
                     //Console.WriteLine("yes the word '" + words[j] + "' is a palindrome.");
-                    palaWords++;
+                    palWords++;
                 }
             }
         }
 
-        public string checkPalaSent(string sentence) // This will check sentence to determine if it is a palindrome
+        private string checkPalaSent(string sentence) // This will check sentence to determine if it is a palindrome
         {
             Regex delimeters = new Regex("[;,.!?\t\r ]|[\n]{2}");// This is a list of delimeters to search for to remove
             string newSent = delimeters.Replace(sentence, ""); // This will make all letters lowercase and search for characters to remove
             //Console.WriteLine("newSent = " + newSent); // Test to see if newSent is formatted properly
             return newSent;
         }
+
+
 
         // This code is adapted from https://www.dotnetperls.com/palindrome
         public Boolean checkWord(string word) // Checks to determine if a word is a palindrome by comparing opposing letters against eachother.
@@ -143,8 +154,15 @@ namespace HelloEnclara
             Console.WriteLine("Please type a paragraph: ");
             para = Console.ReadLine();
             Program p = new Program(para.Replace("Mr.", "Mr").Replace("Mrs.", "Mrs").Replace("Ms.", "Ms")); // Constructor for making the paragraph reading Program
+            Console.WriteLine();
 
-            /*
+            // Parse the paragraph and print the results
+            p.parseParagraph();
+            Console.WriteLine("{0,-23} {1,3}", "Palindrome words: ", p.getPalWords());
+            Console.WriteLine("{0,-23} {1,3}", "Palindrome sentences: ", p.getPalaSents());
+            Console.WriteLine();
+            p.countWords(); // Counts and prints the number of unique word instances
+
             // This loop will allow the user to inut a search letter.
             Console.WriteLine();
             Console.WriteLine("Would you like to input a search letter? y/n");
@@ -153,36 +171,30 @@ namespace HelloEnclara
                 string yn = Console.ReadLine(); 
                 if (yn == "y") // If the user wants to input a search letter
                 {
-                    Console.WriteLine("You selected yes. Please input the search letter.");
-                    p.setLetr(Console.ReadKey().KeyChar);
-                    Console.WriteLine();
-                    break;
+                    while (true)
+                    {
+                        Console.WriteLine("You selected yes. Enter search letter.");
+                        p.setLetr(Console.ReadKey().KeyChar);
+                        Console.WriteLine();
+                        //Console.WriteLine("The words that contain " + p.getLetr() + " are:");
+                        p.searchWords();
+                        Console.WriteLine();
+                        Console.WriteLine("Would you like to search for another letter? y/n");
+                        yn = Console.ReadLine();
+                        if(yn == "n")
+                        {
+                            break;
+                        }
+                    }
                 }
                 if (yn == "n") // If the user does not want to input a search letter
                 {
                     break;
                 }
-                Console.WriteLine("Please select y/n");
-            } */
+
+            } 
 
             Console.WriteLine();
-
-            // If the user chose a search letter then it will be displayed
-            if (p.getLetr() == ' ')
-            {
-
-            }
-            else
-            {
-                Console.WriteLine("The search letter is: " + p.getLetr());
-            }
-
-            p.parseParagraph();
-            Console.WriteLine("{0,-23} {1,3}", "Palindrome words: ", p.getPalaWords());
-            Console.WriteLine("{0,-23} {1,3}", "Palindrome sentences: ", p.getPalaSents());
-            p.countWords();
-
-            //Console.WriteLine("paragraph length is: " + p.getPara().Length); Test to make sure \n is not counted as a character
             Console.ReadKey();
         }
     }

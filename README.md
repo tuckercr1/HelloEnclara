@@ -1,4 +1,5 @@
-# HelloEnclara
+# **HelloEnclara**
+### **Christopher Tucker**
 ### TL;DR
 This is a C# program that will accept a paragraph as an input and display the number of palindrome words, palindrome sentences, unique words, and list all words that contain a letter input by the user. To run it, clone the repo into VS code and click "Start" or press "F5". When prompted, input a paragraph and optionally input a letter to use to search for words containing that letter.
 ### What Is HelloEnclara?

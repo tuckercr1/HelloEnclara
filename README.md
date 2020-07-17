@@ -42,3 +42,6 @@ Sample output of "helloworld", "HelloWorld", and "HELLOWORLD" with "h" input as 
 
 Sample output of "Mr. Owl ate my metal worm." with "m" input as the search letter.
 ![alt text](https://github.com/tuckercr1/HelloEnclara/blob/master/photos/Sample%202%20(1).png)
+
+
+![alt text](https://github.com/tuckercr1/HelloEnclara/blob/master/photos/Sample%202%20(2).png)

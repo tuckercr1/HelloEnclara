@@ -25,3 +25,4 @@ Counting the instance of unique words is handled by the **countWords()** method.
 
 
 Pictured below is the **countWords()** method.
+![alt text](https://github.com/tuckercr1/HelloEnclara/blob/master/photos/countWords.png)

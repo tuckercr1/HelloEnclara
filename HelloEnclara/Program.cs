@@ -1,4 +1,7 @@
-﻿using System;
+﻿// Christopher Tucker
+// 17JUL2020
+
+using System;
 using System.Text.RegularExpressions;
 using System.Linq;
 

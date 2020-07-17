@@ -130,7 +130,7 @@ namespace HelloEnclara
         private string checkPalSent(string sentence) // This will check sentence to determine if it is a palindrome
         {
             Regex delimeters = new Regex("[;,.!?\t\r ]|[\n]{2}");// This is a list of delimeters to search for to remove
-            string newSent = delimeters.Replace(sentence, ""); // This will make all letters lowercase and search for characters to remove
+            string newSent = delimeters.Replace(sentence, ""); // This will search for characters to remove
             //Console.WriteLine("newSent = " + newSent); // Test to see if newSent is formatted properly
             return newSent;
         }
@@ -170,7 +170,7 @@ namespace HelloEnclara
                 string para;
                 Console.WriteLine("Please type a paragraph: ");
                 para = Console.ReadLine();
-                Paragraph p = new Paragraph(para.Replace("Mr.", "Mr").Replace("Mrs.", "Mrs").Replace("Ms.", "Ms").Replace("Jr.", "Jr")); 
+                Paragraph p = new Paragraph(para.Replace("Mr.", "Mr").Replace("Mrs.", "Mrs").Replace("Ms.", "Ms").Replace("Jr.", "Jr").Replace("Dr.", "Dr")); // Replaced some typical titles
                 Console.WriteLine();
 
                 // Parse the paragraph and print the results
@@ -202,7 +202,8 @@ namespace HelloEnclara
                             Console.WriteLine("Enter search character.");
                             p.setLetr(Console.ReadKey().KeyChar);
                             Console.WriteLine();
-                            //Console.WriteLine("The words that contain " + p.getLetr() + " are:");
+                            
+                            // Serach for words with the letter
                             p.searchWords();
                             Console.WriteLine();
                             Console.WriteLine("Search for another character? y/n"); // Ask if user wants to search anoter letter
@@ -239,10 +240,10 @@ namespace HelloEnclara
                     Console.WriteLine();
                 }
                 
-                if ((x != 'x') && (x != 'y'))
+                if ((x != 'x') && (x != 'y')) 
                 {
                     Console.WriteLine();
-                    goto retype;
+                    goto retype; // If the user does not selext 'x' or 'y'
                 }
 
                 if (x == 'x') // If the user wants to exit

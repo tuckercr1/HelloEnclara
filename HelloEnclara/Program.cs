@@ -13,6 +13,7 @@ namespace HelloEnclara
         private char letter = ' '; // The user will optionally input a letter to search for words
         private string[] sentences; // The sentences of the paragraph
         private string[] words; // The words in the paragraph
+        private int uniqCount = 1; // The Unique word count, starts at 1 because if a word has a count then it would occur atleast once
         private int palaWords; // The number of palindrome words
         private int palaSents; // The number of palindrome sentences
 
@@ -63,19 +64,15 @@ namespace HelloEnclara
 
         public void countWords() // Counts the unique instances of the words in the paragraph
         {
-            
-            //int numberOfElements = words.Distinct().Count();
-            //Console.WriteLine(numberOfElements);
-
-            Console.WriteLine(words[0].TrimEnd('\r', '\n'));
-            for(int i = 1; i < words.Length; i++)
+            var result = words.GroupBy(a => a).Select(x => new { key = x.Key, val = x.Count() });
+            foreach (var item in result)
             {
-                if((words[i].ToLower() != words[i - 1].ToLower()) && (i != words.Length))
-                {
-                    Console.WriteLine(words[i]);
-                }
-            } 
+                //Console.WriteLine(item.key + "        " + item.val);
+                Console.WriteLine("{0,-10}   {1,-10}", item.key, item.val);
+            }
+            Console.WriteLine("_________________________________________________________________");
         }
+            
         public void printWords() // Delete this method later
         {
             for (int i = 0; i < words.Length; i++)
@@ -115,7 +112,7 @@ namespace HelloEnclara
             return newSent;
         }
 
-        // This code comes from https://www.dotnetperls.com/palindrome
+        // This code is adapted from https://www.dotnetperls.com/palindrome
         public Boolean checkWord(string word) // Checks to determine if a word is a palindrome by comparing opposing letters against eachother.
         {
             int min = 0;  // Lowest position in a character array
@@ -147,6 +144,7 @@ namespace HelloEnclara
             para = Console.ReadLine();
             Program p = new Program(para.Replace("Mr.", "Mr").Replace("Mrs.", "Mrs").Replace("Ms.", "Ms")); // Constructor for making the paragraph reading Program
 
+            /*
             // This loop will allow the user to inut a search letter.
             Console.WriteLine();
             Console.WriteLine("Would you like to input a search letter? y/n");
@@ -165,7 +163,7 @@ namespace HelloEnclara
                     break;
                 }
                 Console.WriteLine("Please select y/n");
-            }
+            } */
 
             Console.WriteLine();
 
@@ -180,8 +178,8 @@ namespace HelloEnclara
             }
 
             p.parseParagraph();
-            Console.WriteLine("Number of palindrome words: " + p.getPalaWords());
-            Console.WriteLine("Number of palindrome sentences: " + p.getPalaSents());
+            Console.WriteLine("{0,-23} {1,3}", "Palindrome words: ", p.getPalaWords());
+            Console.WriteLine("{0,-23} {1,3}", "Palindrome sentences: ", p.getPalaSents());
             p.countWords();
 
             //Console.WriteLine("paragraph length is: " + p.getPara().Length); Test to make sure \n is not counted as a character

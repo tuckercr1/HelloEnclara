@@ -45,3 +45,7 @@ Sample output of "Mr. Owl ate my metal worm." with "m" input as the search lette
 
 
 ![alt text](https://github.com/tuckercr1/HelloEnclara/blob/master/photos/Sample%202%20(2).png)
+
+
+Bibliography
+- 1. Allen, S., 2020. C# Palindrome Method: Words And Sentences. [online] Dotnetperls.com. Available at: <https://www.dotnetperls.com/palindrome> [Accessed 17 July 2020].

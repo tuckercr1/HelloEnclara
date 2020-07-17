@@ -33,3 +33,4 @@ Pictured below is the **countWords()** method.
 The user is able to input a letter to list all words that contain that letter. The **searchWords()** method will search through the paragraph words to find any words that contain the input letter. Again, words with different capitalizations are the same word, so if a paragraph contained "goodbye" and "GOODBYE" and one inputs the letter "g", then "goodbye" will be listed once.
 
 Pictured below is the **searchWords()** method.
+![alt text](https://github.com/tuckercr1/HelloEnclara/blob/master/photos/searchWords.png)

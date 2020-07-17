@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Text.RegularExpressions;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace HelloEnclara
 {
-    class Program
+    class Paragraph
     {
         private string paragraph; // The user will input a paragraph
         private char letter = ' '; // The user will optionally input a letter to search for words
@@ -18,16 +16,9 @@ namespace HelloEnclara
 
 
 
-        public Program(string para) // Constructor
+        public Paragraph(string para) // Constructor
         {
             paragraph = para; 
-        }
-
-
-
-        public string getPara() // Getter for paragraph
-        {
-            return paragraph;
         }
 
 
@@ -35,13 +26,6 @@ namespace HelloEnclara
         public void setLetr(char letr) // Setter for letter
         {
             letter = letr;
-        }
-
-
-
-        public char getLetr() // Getter for letter
-        {
-            return letter;
         }
 
 
@@ -150,25 +134,26 @@ namespace HelloEnclara
 
 
 
-        // This code is adapted from https://www.dotnetperls.com/palindrome
+        // This code is adapted from:
+        // Allen, S. (n.d.). C# Palindrome Method: Words and Sentences. Retrieved July 17, 2020, from https://www.dotnetperls.com/palindrome
         public Boolean checkWord(string word) // Checks to determine if a word is a palindrome by comparing opposing letters against eachother.
         {
-            int min = 0;  // Lowest position in a character array
-            int max = word.Length - 1; // Highest position in a character array.
+            int bottom = 0;  // Lowest position in a character array
+            int top = word.Length - 1; // Highest position in a character array.
             while (true)
             {
-                if (min > max) // If the lower position is larger than the higher position, then the letters of the word have been traversed and it is a palindrome
+                if (bottom > top) // If the lower bottom is larger than the top position, then the letters of the word have been traversed and it is a palindrome
                 {
                     return true;
                 }
-                char lower = word[min];
-                char upper = word[max];
-                if (char.ToLower(lower) != char.ToLower(upper)) // If alower character does not equal an upper character then the word is not a palindrome
+                char lower = word[bottom];
+                char upper = word[top];
+                if (char.ToLower(lower) != char.ToLower(upper)) // If a lower character does not equal an upper character then the word is not a palindrome
                 {
                     return false;
                 }
-                min++;
-                max--;
+                bottom++;
+                top--;
             }
         }
 
@@ -182,7 +167,7 @@ namespace HelloEnclara
                 string para;
                 Console.WriteLine("Please type a paragraph: ");
                 para = Console.ReadLine();
-                Program p = new Program(para.Replace("Mr.", "Mr").Replace("Mrs.", "Mrs").Replace("Ms.", "Ms")); // Constructor for making the paragraph reading Program
+                Paragraph p = new Paragraph(para.Replace("Mr.", "Mr").Replace("Mrs.", "Mrs").Replace("Ms.", "Ms").Replace("Jr.", "Jr")); 
                 Console.WriteLine();
 
                 // Parse the paragraph and print the results
@@ -257,7 +242,7 @@ namespace HelloEnclara
                     goto retype;
                 }
 
-                if (x == 'x')
+                if (x == 'x') // If the user wants to exit
                 {
                     break;
                 }

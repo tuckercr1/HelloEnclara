@@ -48,7 +48,12 @@ namespace HelloEnclara
 
         private void setWords(string paragraph) // Split the paragraph into words
         {
+            Regex delimeters = new Regex("[;,.!?\t\r ]|[\n]{2}");
             words = paragraph.Split();
+            for(int i = 0; i < words.Length; i++)
+            {
+                words[i] = delimeters.Replace(words[i], "");
+            }
         }
 
         private void sortWords() // Sorts words in alphabetical order
@@ -58,11 +63,11 @@ namespace HelloEnclara
 
         public void countWords() // Counts the unique instances of the words in the paragraph
         {
-            sortWords();
+            
             //int numberOfElements = words.Distinct().Count();
             //Console.WriteLine(numberOfElements);
 
-            Console.WriteLine(words[0]);
+            Console.WriteLine(words[0].TrimEnd('\r', '\n'));
             for(int i = 1; i < words.Length; i++)
             {
                 if((words[i].ToLower() != words[i - 1].ToLower()) && (i != words.Length))
@@ -81,8 +86,9 @@ namespace HelloEnclara
 
         public void parseParagraph() // Search through the paragraph to find palindrome words and sentences
         {
-            setWords(paragraph);
-            sentences = Regex.Split(paragraph, @"(?<=[\.!\?])\s+");
+            setWords(paragraph); // Fills the words array with words from the paragraph
+            sortWords(); // Sorts the words into alphabetical order
+            sentences = Regex.Split(paragraph, @"(?<=[\.!\?])\s+"); // Splits the paragraph into sentences
             for (int i = 0; i < sentences.Length; i++)
             {
                 if (checkWord(checkPalaSent(sentences[i])))

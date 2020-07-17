@@ -3,7 +3,7 @@
 ### TL;DR
 This is a C# program that will accept a paragraph as an input and display the number of palindrome words, palindrome sentences, unique words, and list all words that contain a letter input by the user. To run it, clone the repo into VS code and click "Start" or press "F5". When prompted, input a paragraph and optionally input a letter to use to search for words containing that letter.
 ### What Is HelloEnclara?
-HelloEnclara is a C# solution written for a coding assessment. The solution was completed using VS code 2019 community edition. To run the solution, copy the repo url and clone it to your VS code IDE. From there, either press the "Start" button or press "F5".
+HelloEnclara is a C# solution written for a coding assessment. The solution was completed using VS code 2019 community edition. The solution is called "Program.cs" and it is located in the "HelloEnclara" directory. To run the solution, copy the repo url and clone it to your VS code IDE. From there, either press the "Start" button or press "F5".
 
 
 ### What does it do?
